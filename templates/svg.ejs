@@ -1,0 +1,20 @@
+<svg
+  viewBox="0 0 <%= width %> <%= height %>"
+  xmlns="http://www.w3.org/2000/svg"
+  width="<%= width %>"
+  height="<%= height %>"
+  version="1.1"
+>
+  <defs>
+    <linearGradient id="grad<%= index || 1 %>" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="25%" style="stop-color: <%= color || rgba(252, 70, 107, 1) %>; stop-opacity: 1" />
+      <stop offset="100%" style="stop-color: rgba(0, 0, 0, 1); stop-opacity: 1" />
+    </linearGradient>
+  </defs>
+  <path
+    fill="url(#grad<%= index || 1 %>)"
+    stroke="<%= color || rgba(252, 70, 107, 1) %>"
+    stroke-width="3"
+    d="<%= svgPath %>"
+  />
+</svg>

@@ -1,1 +1,78 @@
 #!/usr/bin/env node
+
+var Path = require("svg-path-generator");
+const SVGUtils = require("../utils/SvgUtils");
+
+const height = 150;
+const width = 300;
+const step = 50;
+
+//
+// EXAMPLE 1 - SIMPLE MOUNTAINS USING `Math.random()`
+//
+function testA() {
+  let level = false;
+  let y = 0;
+
+  function setIsLevel() {
+    const levelWeight = 10; // chance that next mountain section will be level. >1 => false
+    const val = Math.random() * levelWeight;
+    level = val < 1;
+  }
+
+  function setY() {
+    y = Math.random() * height;
+  }
+
+  const path = Path().moveTo(0, height);
+
+  for (var x = 0; x < width; x += step) {
+    if (x > 0) {
+      setIsLevel();
+    }
+
+    if (!level) {
+      setY();
+    }
+
+    path.lineTo(x, y);
+  }
+
+  // close off mountain path
+  path.lineTo(width, height).lineTo(0, height).end();
+
+  console.log("SIMPLE RANDOM");
+  console.log(path + "\n");
+}
+
+//
+// EXAMPLE 2 - PERLIN NOISE
+//
+// function testB() {
+//   noise.seed(Math.random());
+//   // const path = Path().moveTo(0, height);
+
+//   const points = [];
+//   for (let x = 0; x < width; x += 1) {
+//     const val = (noise.perlin2(x / 100, x / 100) + 1) / 2;
+//     points.push(val);
+//     console.log(val);
+//   }
+
+//   const path = SVGUtils.toPath(points, { width, height, step });
+
+//   console.log("PERLIN NOISE");
+//   console.log(path);
+// }
+
+//
+// EXAMPLE 2 - PERLIN NOISE - ALT LIB
+//
+function testC() {
+  const path = SVGUtils.genPath();
+  console.log("PERLIN NOISE");
+  console.log(path);
+}
+
+testA();
+testC();

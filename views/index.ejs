@@ -5,10 +5,49 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <h3>Instructions</h3>
-    <p>Open up the terminal and run the following:</p>
-    <p><code>npm run genart</code></p>
+    <div class="container">
+      <h1><%= title %></h1>
+      <p>Welcome to <%= title %></p>
+      <h3>Instructions</h3>
+      <ul>
+        <li>Press <code>CMD + R</code> to refresh until you see an SVG you like.</li>
+        <li>Hit the <code>SAVE</code> button to save this SVG file.</li>
+      </ul>
+      <p>
+        <svg
+          viewBox="0 0 <%= width %> <%= height %>"
+          xmlns="http://www.w3.org/2000/svg"
+          width="<%= width %>"
+          height="<%= height %>"
+          version="1.1"
+        >
+          <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+              <!-- <stop offset="0%" style="stop-color: rgb(63, 191, 251); stop-opacity: 1" /> -->
+              <!-- <stop offset="25%" style="stop-color: rgba(63, 94, 251, 1); stop-opacity: 1" /> -->
+              <!-- <stop offset="0%" style="stop-color: rgba(252,70,107,1); stop-opacity: 1" /> -->
+              <stop offset="25%" style="stop-color: <%= color %>; stop-opacity: 1" />
+              <stop offset="100%" style="stop-color: rgba(0, 0, 0, 1); stop-opacity: 1" />
+            </linearGradient>
+          </defs>
+          <path fill="url(#grad1)" stroke="<%= color %>" stroke-width="3" d="<%= svgPath %>" />
+        </svg>
+      </p>
+      <p>
+        <form method="post" action="/">
+          <input type="hidden" name="width" value="<%= width %>" />
+          <input type="hidden" name="height" value="<%= height %>" />
+          <input type="hidden" name="color" value="<%= color %>" />
+          <input type="hidden" name="svgPath" value="<%= svgPath %>" />
+          <button type="submit" role="button" class="btn btn-primary">Save SVG</button>
+        </form>
+      </p>
+      <h3>Saved SVGs</h3>
+      <div>
+        <% svgFiles && svgFiles.forEach((file) => { %>
+          <%- file %>
+        <% }); %>
+      </div>
+    </div>
   </body>
 </html>

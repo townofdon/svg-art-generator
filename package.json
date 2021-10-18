@@ -4,18 +4,23 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "genart": "echo \"coming soon!\" && exit 1;"
+    "genart": "node ./bin/genart"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
-    "ejs": "~2.6.1",
+    "ejs": "^2.6.2",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "svg-mountain-range": "^1.0.3"
+    "nocache": "^3.0.1",
+    "path": "^0.12.7",
+    "query-string": "^7.0.1",
+    "rimraf": "^3.0.2",
+    "svg-path-generator": "^1.1.0"
   },
   "devDependencies": {
+    "eslint": "^8.0.1",
     "nodemon": "^2.0.13"
   }
 }
